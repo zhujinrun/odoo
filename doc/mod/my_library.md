@@ -66,3 +66,32 @@ python odoo-bin --addons-path=local-addons,addons,odoo/addons -d odoo16 -r odoo1
 设置 -> 一般设置 -> Developer Tools -> 激活开发者模式
 
 查看模块详细说明
+
+
+## 4.完善模块文件目录结构
+
+### 4.1 目录结构
+
+```
+my_library
+    __init__.py
+    __manifest__.py
+    controllers
+        __init__.py
+    models
+        __init__.py
+    views
+    security
+    static
+    data
+    demo
+```
+
+
+### 4.2 导入 python 模块
+
+`__init__.py`：
+```
+from . import controllers
+from . import models
+```
