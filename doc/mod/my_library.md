@@ -95,3 +95,48 @@ my_library
 from . import controllers
 from . import models
 ```
+
+
+## 5.创建一个模型（model）
+
+### 5.1 LibraryBook（图书信息）
+
+字段：
+* name (书名)
+* data_release (出版日期)
+* author_ids (作者)
+
+```
+from odoo import models,fields
+
+class library_book(models.Model):
+    _name = 'library.book'
+    _description = '图书信息'
+
+    name = fields.Char('书名', required=True)
+    date_release = fields.Date('出版日期')
+    author_ids = fields.Many2many('res.partner', string='作者')
+```
+
+### 5.2 导入 python 模块
+
+`models/__init__.py`：
+
+```
+from . import library_book
+```
+
+`my_library/__init__.py`：
+
+```
+from . import models
+```
+
+### 5.3 升级模块
+
+重启 Odoo16 -> 应用 -> 搜索 已安装 模块：`图书管理` -> 升级
+
+### 5.4 确认数据库表
+
+* library_book
+* library_book——res_partner_rel
