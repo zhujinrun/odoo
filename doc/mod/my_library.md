@@ -28,3 +28,41 @@ python odoo-bin --addons-path=local-addons,addons,odoo/addons -d odoo16 -r odoo1
 ### 2.4 安装模块
 
 应用 -> 更新应用列表 -> 搜索 模块：`图书管理` -> 激活
+
+
+## 3.完善模块说明文件：__manifest__.py
+
+### 3.1 文件内容
+
+```
+{
+    'name':'图书管理',
+    'version':'0.1',
+    'summary':'这是图书管理模块概要说明',
+    'sequence': 1,
+    'description': """
+图书管理，这是模块详细说明。
+===================================================   
+    """,
+    'author':'Zhujr',
+    'category':'Uncategorized',
+    'website':'https://space.bilibili.com/333462738',
+    'depends':['base'],
+    # 'data':['views/views.xml'],
+    # 'demo':['demo.xml'],
+}
+```
+
+### 3.2 应用图标
+
+`static/description/icon.png`
+
+### 3.3 升级模块
+
+重启 Odoo16 -> 应用 -> 搜索 已安装 模块：`图书管理` -> 升级
+
+### 3.4 激活开发者模式
+
+设置 -> 一般设置 -> Developer Tools -> 激活开发者模式
+
+查看模块详细说明
