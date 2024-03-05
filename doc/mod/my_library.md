@@ -175,8 +175,8 @@ from . import models
 ### 6.3 创建菜单（menu）
 
 ```xml
-    <menuitem id="library_book_base_menu" name="图书管理" />
-    <menuitem id="library_book_menu" name="图书" parent="library_book_base_menu" action="library_book_action" />
+    <menuitem id="library_base_menu" name="图书管理" />
+    <menuitem id="library_book_menu" name="图书" parent="library_base_menu" action="library_book_action" />
 ```
 
 ### 6.4 升级模块
@@ -190,3 +190,32 @@ from . import models
 调试按钮 -> 成为超级用户
 
 可查看菜单、进入操作页面，进行增、删、改、查操作。
+
+
+## 7.自定义视图（页面）
+
+### 7.1 列表视图
+
+图书列表页面：
+```
+书名  |  出版日期
+```
+### 7.2 表单视图
+
+图书详情/编辑页面：
+```
+书名  |  作者  |  出版日期
+```
+
+### 7.3 搜索视图
+
+搜索栏：
+* 查询：按书名或作者，进行模糊查询
+* 筛选：只查看未设置作者的书籍
+
+
+### 7.4 升级模块
+
+重启 Odoo16 -> 应用 -> 搜索 已安装 模块：`图书管理` -> 升级
+
+切换超级用户身份，确认页面效果。
