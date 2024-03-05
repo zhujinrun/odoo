@@ -12,6 +12,7 @@
     'category':'Uncategorized',
     'website':'https://space.bilibili.com/333462738',
     'depends':['base'],
-    # 'data':['views/views.xml'],
+    'application': True,
+    'data':['views/library_book.xml'],
     # 'demo':['demo.xml'],
 }

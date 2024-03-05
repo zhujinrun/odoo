@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="library_book_action" model="ir.actions.act_window">
+        <field name="name">图书列表</field>
+        <field name="res_model">library.book</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="library_book_base_menu" name="图书管理" />
+    <menuitem id="library_book_menu" name="图书" parent="library_book_base_menu" action="library_book_action"/>
+</odoo>

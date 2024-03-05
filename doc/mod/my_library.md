@@ -139,4 +139,54 @@ from . import models
 ### 5.4 确认数据库表
 
 * library_book
-* library_book——res_partner_rel
+* library_book_res_partner_rel
+
+
+## 6.添加菜单和视图（页面）
+
+### 6.1 创建视图文件
+
+文件：
+`views/library_book.xml`
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Data records go here -->
+</odoo>
+```
+添加到 manifest 文件：
+
+```     
+'application': True,
+'data':['views/library_book.xml'],
+```
+
+### 6.2 创建动作（action）
+
+```xml
+    <record id="library_book_action" model="ir.actions.act_window">
+        <field name="name">图书列表</field>
+        <field name="res_model">library.book</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+```
+
+### 6.3 创建菜单（menu）
+
+```xml
+    <menuitem id="library_book_base_menu" name="图书管理" />
+    <menuitem id="library_book_menu" name="图书" parent="library_book_base_menu" action="library_book_action" />
+```
+
+### 6.4 升级模块
+
+重启 Odoo16 -> 应用 -> 搜索 已安装 模块：`图书管理` -> 升级
+
+菜单不显示，原因：尚未配置权限
+
+### 6.5 超级用户身份运行
+
+调试按钮 -> 成为超级用户
+
+可查看菜单、进入操作页面，进行增、删、改、查操作。
