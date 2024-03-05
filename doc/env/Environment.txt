@@ -1,0 +1,42 @@
+PostgreSQL 16.2 安装：
+postgresql-16.2-1-windows-x64.exe
+
+D:\Program Files\PostgreSQL\16\bin
+
+超级用户：
+postgresql
+1qaz@WSX
+
+odoo用户:
+odoo16
+odoo16
+
+
+Python 3.9.6 安装：
+python-3.9.6-amd64.exe
+
+D:\Program\pvm\v3.9.6
+
+Odoo 16.0 源码下载：
+cd E:\code\PythonProjects
+git clone --branch 16.0 https://github.com/odoo/odoo.git odoo16
+
+
+cd odoo16
+code .
+python -m pip install --upgrade pip
+python -m pip install --upgrade pip --force-reinstall
+pip install -r requirements.txt
+pip install gevent==21.8.0
+注释掉 gevent 相关内容
+# gevent==1.5.0 ; python_version == '3.7'
+# gevent==20.9.0 ; python_version > '3.7' and python_version <= '3.9'
+# gevent==21.8.0 ; python_version > '3.9' and python_version <= '3.10'  # (Jammy)
+# gevent==22.10.2; python_version > '3.10'
+pip install -r requirements.txt
+
+python ./odoo-bin -c ./odoo.conf
+
+
+Odoo 16.0 文档：
+https://www.odoo.com/documentation/16.0/zh_CN/administration/install.html
