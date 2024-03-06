@@ -29,3 +29,9 @@ class LibraryBook(models.Model):
 
     currency_id = fields.Many2one('res.currency', string='货币类型')
     retail_price = fields.Monetary('零售价格', currency_field='currency_id')
+
+    publisher_id = fields.Many2one('res.partner', string='出版社',
+                                   # optional=True,
+                                   ondelete='set null', # 'restrict', 'cascade'
+                                   context={},
+                                   domain=[])
