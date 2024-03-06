@@ -51,14 +51,14 @@ class LibraryBook(models.Model):
 
 ### 2.1 字段与类型
 
-notes: 备注，Text
-state: 状态，Selection
-description: 内容简介，Html
-cover: 封面，Binary
-out_of_print: 是否绝版，Boolean
-date_updated: 更新时间，Date
-pages: 页数，Integer
-reader_rating: 读者评分，Float
+* notes: 备注，Text
+* state: 状态，Selection
+* description: 内容简介，Html
+* cover: 封面，Binary
+* out_of_print: 是否绝版，Boolean
+* date_updated: 更新时间，Date
+* pages: 页数，Integer
+* reader_rating: 读者评分，Float
 
 ### 2.2 更新视图
 
@@ -67,3 +67,24 @@ form 中添加字段
 ### 2.3 升级应用
 
 进入 form 页面确认添加的字段
+
+
+## 2-3. 设置字段的属性
+
+### 3.1 添加属性
+
+* string：字段的显示名称
+* required：是否必填
+* translate：启用字段值的翻译
+* index：是否为字段添加索引
+* default：设置字段的默认值
+* groups：限制字段只能被给定组用户访问
+* states：值对列表的字典映射
+* help：用户看到的字段的提示条
+* invisible：字段是否可见。默认为False，即可见
+* readonly：字段是否只读。默认为False，即可编辑
+* store：字段是否存储到数据库，针对计算字段，默认值为False，其它字段默认为True
+
+### 3.2 升级应用
+
+确认属性设置后的效果
