@@ -49,3 +49,6 @@ Demo data:
 
 Odoo 16.0 文档：
 https://www.odoo.com/documentation/16.0/zh_CN/administration/install.html
+
+Odoo 16.0 视频：
+https://space.bilibili.com/580667120/channel/seriesdetail?sid=2831349

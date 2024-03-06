@@ -22,7 +22,8 @@
                         <field name="date_release"/>
                     </group>
                     <group>
-                        <field name="author_ids" widget="many2many_tags" />
+                        <field name="author_ids" widget="many2many_tags"/>
+                        <field name="short_name"/>
                     </group>
                 </group>
             </form>
