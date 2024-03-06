@@ -92,11 +92,11 @@ form 中添加字段
 
 ## 2-4. 运行时设置浮点数字段的精度
 
-### 4.1 添加字段：
+### 4.1 模型添加字段：
 
 * cost_price，采购价格，Float(,digits='Book Price')
 
-### 4.2 添加表单字段
+### 4.2 表单添加字段
 
 `<field name="cost_price"/>`
 
@@ -109,3 +109,22 @@ form 中添加字段
 * 成为超级用户
 * 设置 -> 技术 -> 数据库结构 -> 小数准确性（Decimal Accuracy）
 * 新建 -> 用途：Book Price -> 数字：0 -> 保存
+
+
+## 2-5. 添加货币类型字段
+
+### 5.1 模型添加字段：
+
+* currency_id，货币类型，Many2one('res.currency', )
+* retail_price，零售价格，Monetary(, currency_field='currency_id')
+
+### 5.2 表单添加字段
+
+```xml
+    <field name="retail_price"/>
+    <field name="currency_id"/>
+```
+
+### 5.3 升级应用
+
+支持多货币设置
