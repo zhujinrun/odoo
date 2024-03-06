@@ -25,3 +25,4 @@ class LibraryBook(models.Model):
                            states={'lost':[('readonly',True)]},
                            help='图书总页数')
     reader_rating = fields.Float('读者评分',digits=(14,4))
+    cost_price = fields.Float('采购价格', digits='Book Price')
