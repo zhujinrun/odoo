@@ -13,6 +13,10 @@
     'website':'https://space.bilibili.com/333462738',
     'depends':['base'],
     'application': True,
-    'data':['views/library_book.xml'],
+    'data':[
+        'security/library_book_security.xml',
+        'security/ir.model.access.csv',
+        'views/library_book_views.xml'
+     ],
     # 'demo':['demo.xml'],
 }

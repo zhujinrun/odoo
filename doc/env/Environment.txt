@@ -37,6 +37,15 @@ pip install -r requirements.txt
 
 python ./odoo-bin -c ./odoo.conf
 
+Odoo 16.0 初始化配置：
+Master Password: 1qaz@WSX
+Database Name: odoo16
+Email: admin
+Password: admin
+Phone number: 
+Language: Chinese(Simplified) / 简体中文
+Country:
+Demo data:
 
 Odoo 16.0 文档：
 https://www.odoo.com/documentation/16.0/zh_CN/administration/install.html
