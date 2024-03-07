@@ -302,7 +302,7 @@ class LibraryBookCategory(models.Model):
 
 ### 11.1 Odoo 中的三种继承：
 
-* Class inheritance（extension）：类继承
+* **Class inheritance（extension）：类继承**
 * Prototype inheritance：原型继承
 * Deltegation inheritance：委托继承
 
@@ -346,3 +346,45 @@ class ExtResPartner(models.Model):
 ### 11.4 升级应用：
 
 验证扩展模型的属性
+
+
+## 2-12. 委托继承：连接现有模型
+
+### 12.1 Odoo 中的三种继承：
+
+* Class inheritance（extension）：类继承
+* Prototype inheritance：原型继承
+* **Deltegation inheritance：委托继承**
+
+### 12.2 会员模型：`library.member`
+
+属性：
+* 开始时间（date_start）
+* 结束时间（date_end）
+* 会员编号（member_number）
+* 出生日期（date_of_birth）
+
+连接模型：`res.partner`
+
+连接字段：`partner_id`
+
+### 12.3 表单添加字段：
+
+* 视图：tree, form
+* 菜单：会员管理
+
+### 12.4 访问权限设置：
+
+| id | name | model_id:id | group_id:id | perm_read | perm_write | perm_create | perm_unlink |
+|:--------|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|:--------:|
+| acl_member | library.member default | model_library_member |  | 1 | 0 | 0 | 0 |
+| acl_member_librarian | library.member librarian | model_library_member | group_librarian | 1 | 1 | 1 | 1 |
+
+### 12.5 升级应用：
+
+会员管理：
+
+* 会员列表
+* 添加会员
+* 编辑会员
+* 删除会员
