@@ -8,6 +8,7 @@
                 <field name="name"/>
                 <field name="date_release"/>
                 <field name="release_days"/>
+                <field name="publisher_city"/>
                 <field name="state"/>
             </tree>
         </field>
@@ -27,6 +28,7 @@
                         <field name="notes"/>
                         <field name="retail_price"/>
                         <field name="currency_id"/>
+                        <field name="publisher_city"/>
                     </group>
                     <group>
                         <field name="short_name"/>

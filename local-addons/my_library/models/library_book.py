@@ -41,8 +41,10 @@ class LibraryBook(models.Model):
                                    ondelete='set null', # 'restrict', 'cascade'
                                    context={},
                                    domain=[])
-    
+    publisher_city = fields.Char('出版城市', related='publisher_id.city', readonly=True)
+
     category_id = fields.Many2one('library.book.category', string='类别')
+
 
 
     @api.constrains('date_release')

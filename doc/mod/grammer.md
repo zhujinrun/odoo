@@ -275,3 +275,24 @@ class LibraryBookCategory(models.Model):
 ### 9.4 升级应用：
 
 验证计算字段
+
+
+## 2-10. 引用关联字段所在模型中的其他字段
+
+### 10.1 关联字段：出版城市
+
+关联字段：出版社 publisher_id
+所在模型：res.partner
+引用字段：city
+
+### 10.2 模型添加字段：
+
+属性：publisher_city，出版城市，Char(, related='publisher_id.city', readonly=True)
+
+### 10.3 表单添加字段：
+
+列表和表单添加“出版城市”字段
+
+### 10.4 升级应用：
+
+验证引用字段
