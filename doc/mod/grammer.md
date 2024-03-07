@@ -240,3 +240,38 @@ class LibraryBookCategory(models.Model):
 ### 8.4 升级应用：
 
 验证约束生效结果
+
+
+## 2-9. 模型添加计算字段
+
+### 9.1 计算字段：
+
+出版天数 = 当前日期 - 出版日期
+
+### 9.2 模型添加字段：
+
+* 字段定义
+
+`release_days = fields.Integer('出版天数', compute='_compute_release_days', store=False, compute_sudo=True, help='出版时间距今天多少天')`
+
+* 方法定义
+
+```python
+    @api.depends('date_release')
+    def _compute_release_days(self):
+        today = fields.Date.today()
+        for record in self:
+            if record.date_release:
+                delta = today - record.date_release
+                record.release_days = int(delta.days)
+            else:
+                record.release_days = 0
+```
+
+### 9.3 表单添加字段：
+
+列表和表单添加“出版天数”字段
+
+### 9.4 升级应用：
+
+验证计算字段

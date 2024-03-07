@@ -13,6 +13,7 @@ class LibraryBook(models.Model):
 
     name = fields.Char('书名', required=True)
     date_release = fields.Date('出版日期')
+    release_days = fields.Integer('出版天数', compute='_compute_release_days', store=False, compute_sudo=True, help='出版时间距今天多少天')
     author_ids = fields.Many2many('res.partner', string='作者')
 
     short_name = fields.Char('书名简称', required=True, 
@@ -49,3 +50,13 @@ class LibraryBook(models.Model):
         for record in self:
             if record.date_release and record.date_release > fields.Date.today():
                 raise models.ValidationError('出版日期不能大于当前日期。')
+            
+    @api.depends('date_release')
+    def _compute_release_days(self):
+        today = fields.Date.today()
+        for record in self:
+            if record.date_release:
+                delta = today - record.date_release
+                record.release_days = int(delta.days)
+            else:
+                record.release_days = 0
