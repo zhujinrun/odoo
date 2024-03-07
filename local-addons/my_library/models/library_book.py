@@ -1,3 +1,4 @@
+from odoo.exceptions import UserError
 from odoo import api, models,fields
 
 class LibraryBook(models.Model):
@@ -82,7 +83,7 @@ class LibraryBook(models.Model):
             if record.is_allowed_transition(record.state, new_state):
                 record.state = new_state
             else:
-                continue
+                raise UserError('状态转换不合法！')
 
     def make_available(self):
         self.change_state('available')
