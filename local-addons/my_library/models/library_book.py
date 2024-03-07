@@ -35,3 +35,5 @@ class LibraryBook(models.Model):
                                    ondelete='set null', # 'restrict', 'cascade'
                                    context={},
                                    domain=[])
+    
+    category_id = fields.Many2one('library.book.category', string='类别')

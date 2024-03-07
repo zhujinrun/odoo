@@ -149,3 +149,58 @@ form 中添加字段
 ### 6.4 升级应用
 
 下拉列表选择出版社
+
+
+## 2-7. 创建带有层次结构的模型
+
+### 7.1 模型：图书类别：
+
+library_book_category, 图书类别
+* parent_id，父类别，Many2one('library.book.category', string='父类别')
+* child_ids，子类别，One2many('library.book.category', 'parent_id', string='子类别')
+
+
+### 7.2 层级支持和防止循环引用：
+
+```python
+from odoo import api, models,fields
+
+class LibraryBookCategory(models.Model):
+    _name = 'library.book.category'
+    _description = '图书类别'
+
+    # 层级支持
+    _parent_stored = True
+    _parent_name = 'parent_id' # optional if field is 'parent_id'
+    parent_path = fields.Char('父节点路径', index=True)
+
+    # 字段定义
+    name = fields.Char('类别', required=True)
+    parent_id = fields.Many2one('library.book.category', string='父类别', ondelete='restrict', index=True)
+    child_ids = fields.One2many('library.book.category', 'parent_id', string='子类别')
+
+    # 约束：防止循环引用
+    @api.constrains('parent_id')
+    def _check_hierarchy(self):
+        if not self._check_recursion():
+            raise models.ValidationError('错误！不允许循环引用')
+```
+
+### 7.3 访问权限设置：
+
+| id | name | model_id:id | group_id:id | perm_read | perm_write | perm_create | perm_unlink |
+|:--------|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|:--------:|
+| acl_book_category | library.book_category default | model_library_book_category |  | 1 | 0 | 0 | 0 |
+| acl_book_category_librarian | library.book_category librarian | model_library_book_category | group_librarian | 1 | 1 | 1 | 1 |
+
+### 7.4 模型添加字段：
+
+* category_id，类别，Many2one('library.book.category', string='类别')
+
+### 7.5 表单添加字段：
+
+`<field name="category_id"/>`
+
+### 7.6 升级应用：
+
+设置图书的类别，添加类别/父类别

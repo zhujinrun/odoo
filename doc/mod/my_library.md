@@ -255,6 +255,12 @@ from . import models
 
 文件：`security/ir.model.access.csv`:
 
+| id | name | model_id:id | group_id:id | perm_read | perm_write | perm_create | perm_unlink |
+|:--------|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|:--------:|
+| acl_book | library.book default | model_library_book |  | 1 | 0 | 0 | 0 |
+| acl_book_librarian | library.book librarian | model_library_book | group_librarian | 1 | 1 | 1 | 1 |
+
+
 ### 8.4 更新 manifest 文件
 
 将 `library_book_security.xml` 和 `ir.model.access.csv` 添加到 `data` 属性中。注意：如果您不遵守安全文件的顺序，则必须在`__manifest__.py`中将与安全相关的`.xml`文件放在`·.csv`文件之前
