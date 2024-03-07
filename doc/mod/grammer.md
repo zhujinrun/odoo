@@ -204,3 +204,39 @@ class LibraryBookCategory(models.Model):
 ### 7.6 升级应用：
 
 设置图书的类别，添加类别/父类别
+
+
+## 2-8. 模型添加数据约束
+
+### 8.1 约束类型：
+
+* 数据库约束：postgreSQL
+* 服务端逻辑：python
+
+### 8.2 添加数据库约束：
+
+* 书名：唯一
+* 页数：非负数
+
+```python
+    _sql_constraints = [
+        ('name_uniq', 'unique (name)', '书名不能重复'),
+        ('positive_pages', 'check (pages>0)', '页数必须大于0')
+    ]
+```
+
+### 8.3 添加服务端约束：
+
+* 出版日期：不能大于当前日期
+
+```python
+    @api.constrains('date_release')
+    def _check_date_release(self):
+        for record in self:
+            if record.date_release and record.date_release > fields.Date.today():
+                raise models.ValidationError('出版日期不能大于当前日期。')
+```
+
+### 8.4 升级应用：
+
+验证约束生效结果

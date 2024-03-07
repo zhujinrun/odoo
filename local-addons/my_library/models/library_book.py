@@ -1,10 +1,15 @@
-from odoo import models,fields
+from odoo import api, models,fields
 
 class LibraryBook(models.Model):
     _name = 'library.book'
     _description = '图书信息'
     _order = 'date_release desc, name'
     _rec_name = 'short_name'
+
+    _sql_constraints = [
+        ('name_uniq', 'unique (name)', '书名不能重复'),
+        ('positive_pages', 'check (pages>0)', '页数必须大于0')
+    ]
 
     name = fields.Char('书名', required=True)
     date_release = fields.Date('出版日期')
@@ -37,3 +42,10 @@ class LibraryBook(models.Model):
                                    domain=[])
     
     category_id = fields.Many2one('library.book.category', string='类别')
+
+
+    @api.constrains('date_release')
+    def _check_date_release(self):
+        for record in self:
+            if record.date_release and record.date_release > fields.Date.today():
+                raise models.ValidationError('出版日期不能大于当前日期。')
