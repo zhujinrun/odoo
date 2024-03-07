@@ -296,3 +296,53 @@ class LibraryBookCategory(models.Model):
 ### 10.4 升级应用：
 
 验证引用字段
+
+
+## 2-11. 类继承：扩展现有模型
+
+### 11.1 Odoo 中的三种继承：
+
+* Class inheritance（extension）：类继承
+* Prototype inheritance：原型继承
+* Deltegation inheritance：委托继承
+
+### 11.2 扩展模型：
+
+属性：
+* 所著书籍（authored_book_ids）
+* 著作数量（authored_book_count）
+
+```python
+
+class ExtResPartner(models.Model):
+    _inherit = 'res.partner'
+    _order = 'name'
+
+    authored_book_ids = fields.Many2many('library.book', string='著作')
+    authored_book_count = fields.Integer('著作数量', compute='_compute_authored_book_count', store=False)
+
+    @api.depends('authored_book_ids')
+    def _compute_authored_book_count(self):
+        for record in self:
+            record.authored_book_count = len(record.authored_book_ids)
+```
+
+### 11.3 表单添加字段：
+
+```xml
+                    <notebook>
+                        <page string="作者详情">
+                            <field name="author_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="authored_book_count"/>
+                                    <field name="authored_book_ids" widget="many2many_tags"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+```
+
+### 11.4 升级应用：
+
+验证扩展模型的属性
