@@ -19,11 +19,16 @@
         <field name="model">library.book</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <button name="make_available" type="object" string="可用"/>
+                    <button name="make_borrowed" type="object" string="借出"/>
+                    <button name="make_lost" type="object" string="遗失"/>
+                </header>
                 <sheet>
                     <group>
                         <group>
                             <field name="name"/>
-                            <field name="author_ids" widget="many2many_tags"/>
+                            <!-- <field name="author_ids" widget="many2many_tags"/> -->
                             <field name="state"/>
                             <field name="pages"/>
                             <field name="notes"/>

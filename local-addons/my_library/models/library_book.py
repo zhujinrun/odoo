@@ -20,7 +20,7 @@ class LibraryBook(models.Model):
                              translate=True, index=True)
 
     notes = fields.Text('备注')
-    state = fields.Selection([('draft', '不可用'), ('available', '可用'), ('lost', '遗失') ], string='状态', 
+    state = fields.Selection([('draft', '未上架'), ('available', '可借阅'), ('borrowed', '已借出'), ('lost', '遗失') ], string='状态', 
                              default='draft')
     description = fields.Html('内容简介')
     cover = fields.Binary('封面')
@@ -62,3 +62,33 @@ class LibraryBook(models.Model):
                 record.release_days = int(delta.days)
             else:
                 record.release_days = 0
+
+
+    @api.model
+    def is_allowed_transition(self, state, new_state):
+        allowed = [
+            ('draft', 'available'),
+            ('available', 'borrowed'),
+            ('borrowed', 'available'),
+            ('available', 'lost'),
+            ('borrowed', 'lost'),
+            ('lost', 'available')
+        ]
+
+        return (state, new_state) in allowed
+
+    def change_state(self, new_state):
+        for record in self:
+            if record.is_allowed_transition(record.state, new_state):
+                record.state = new_state
+            else:
+                continue
+
+    def make_available(self):
+        self.change_state('available')
+
+    def make_borrowed(self):
+        self.change_state('borrowed')
+
+    def make_lost(self):
+        self.change_state('lost')
